@@ -1,0 +1,35 @@
+CREATE DATABASE  db_Marketplace
+
+USE db_Marketplace
+
+Create TABLE Usuarios(
+		ID INT PRIMARY KEY NOT NULL,
+		Nome VARCHAR(50) NOT NULL,
+		Email VARCHAR(50) NOT NULL,
+		Senha VARCHAR(50) NOT NULL,
+		Endereco VARCHAR(100) NOT NULL
+)
+
+CREATE TABLE Categorias(
+		ID INT PRIMARY KEY NOT NULL,
+		Descricao VARCHAR(50) NOT NULL
+)
+
+CREATE TABLE Produtos(
+		ID INT PRIMARY KEY IDENTITY NOT NULL,
+		NomeProduto VARCHAR(50) NOT NULL,
+		Descricao VARCHAR(100) NOT NULL,
+		Preco FLOAT NULL,
+		FK_Criador INT NOT NULL,
+		FK_Categoria INT NOT NULL,
+		FOREIGN KEY (FK_Criador) REFERENCES Usuarios (ID),
+		FOREIGN KEY (FK_Categoria) REFERENCES Categorias (ID)
+)
+
+CREATE TABLE Compras(
+		FK_Comprador INT NOT NULL,
+		FK_Produtos INT NOT NULL,
+		FOREIGN KEY (FK_Comprador) REFERENCES Usuarios (ID),
+		FOREIGN KEY (FK_Produtos) REFERENCES Produtos (ID)
+)
+
